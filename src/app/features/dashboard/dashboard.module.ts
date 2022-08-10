@@ -8,7 +8,6 @@ import { DoctorsComponent } from './doctors/doctors.component';
 import { HospitalsComponent } from './hospitals/hospitals.component';
 import { SharedModule } from '../../shared/shared.module';
 import { MaterialModule } from '../../material/material.module';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -23,7 +22,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     DashboardRoutingModule,
     SharedModule,
     MaterialModule,
-    FlexLayoutModule
   ]
 })
 export class DashboardModule { }
