@@ -1,17 +1,41 @@
-.spacer {
-    flex: 1 1 auto;
-}
-
 mat-sidenav {
-    width: 200px;
+    width: 280px;
+    border-right: none;
+    text-align: center;
 }
 
-.container {
-    margin: 20px 20px;
+mat-sidenav-container {
+    height: calc(100vh - 65px);
 }
 
-mat-nav-list{
+.avatar {
+    border-radius: 50%;
+    width: 110px;
+    height: 110px;
+    margin: 0 auto;
+}
+
+.photo-user {
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+}
+
+.menu-button {
+    width: 100%;
     display: flex;
-    justify-content: center;
-    margin-top: 10px;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 1rem;
+    margin: 10px 0;
+}
+
+.menu-button mat-icon {
+    margin-right: 8px;
+}
+
+mat-divider {
+    margin: 20px 0px;
+    background-color: #fff;
 }
