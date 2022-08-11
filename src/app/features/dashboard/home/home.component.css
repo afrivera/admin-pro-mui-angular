@@ -16,10 +16,11 @@ mat-sidenav-container {
 }
 
 .photo-user {
-    border-radius: 100%;
+    border-radius: 50%;
     width: 30px;
     height: 30px;
-    object-fit: cover;
+    margin: 0 auto;
+    object-fit: fill;
 }
 
 .menu-button {

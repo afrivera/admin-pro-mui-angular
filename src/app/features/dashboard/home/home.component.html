@@ -5,7 +5,7 @@
     <button mat-icon-button (click)="snav.open()" *ngIf="!snav.opened">
         <mat-icon >menu</mat-icon>
     </button>
-    <span>Admin Pro</span>
+    <span><b>Admin</b>Pro</span>
 </mat-toolbar>
 
 <mat-sidenav-container>
@@ -17,10 +17,10 @@
             </span>
     
             <mat-divider></mat-divider>
-            <mat-list-item (click)="trigger.openMenu()" class="text-left">
-                <p mat-line class="content-center"><mat-icon class="align-middle" color="primary">person</mat-icon> profile</p>
+            <mat-list-item (click)="trigge.openMenu()" class="text-left">
+                <p mat-line class="content-center"><mat-icon class="mr-2 align-middle" color="primary">person</mat-icon>Profile</p>
                 <button mat-icon-button
-                        #trigger="matMenuTrigger"
+                        #trigge="matMenuTrigger"
                         [mat-menu-trigger-for]="men">
                     <mat-icon>chevron_right</mat-icon>
                 </button>
@@ -29,10 +29,9 @@
                 <button mat-menu-item>change</button>
                 <button mat-menu-item>color</button>
             </mat-menu>
-            <mat-list-item (click)="trigger.openMenu()">
-                <p mat-line>
-                    manteinance
-                </p>
+            <mat-list-item (click)="trigger.openMenu()"
+                           class="text-left">
+                <p mat-line class="content-center"><mat-icon class="mr-2 align-middle" color="primary">settings</mat-icon>Manteinance</p>
                 <button mat-icon-button 
                         #trigger=matMenuTrigger 
                         [matMenuTriggerFor]="menu">
@@ -40,15 +39,18 @@
                 </button>
             </mat-list-item>
             <mat-menu #menu="matMenu">
-                <button mat-menu-item>user</button>
-                <button mat-menu-item>doctor</button>
+                <a mat-menu-item (click)="snav.close()" routerLink="./users">user</a>
+                <a mat-menu-item (click)="snav.close()" routerLink="./doctors">doctor</a>
+                <a mat-menu-item (click)="snav.close()" routerLink="./hospitals">hospital</a>
             </mat-menu>
     
         </mat-nav-list>
     </mat-sidenav>
    
     <div style="height: 90vh" class="container px-5  mx-auto max-w-7x1">
-        <router-outlet></router-outlet>
+        <div class="container">
+            <router-outlet></router-outlet>
+        </div>
     </div>
 
 </mat-sidenav-container>
