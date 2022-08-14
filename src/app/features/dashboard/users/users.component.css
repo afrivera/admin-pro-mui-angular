@@ -1,5 +1,7 @@
 table {
   width: 100%;
+  min-width: 882px;
+  overflow: auto;
 }
 
 .mat-form-field {
