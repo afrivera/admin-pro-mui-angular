@@ -1,1 +1,34 @@
-<p>login works!</p>
+<mat-card class="w-full max-w-[300px]">
+    <img class="w-1/2 mx-auto mb-3" src="./assets/login/log.png" alt="photo-login">
+    <div class="flex justify-center">
+        <mat-card-title >Login</mat-card-title>        
+    </div>
+    <form autocomplete="off" 
+          [formGroup]="loginForm"
+          (submit)="login()">
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" 
+                   placeholder="Juan@correo.com"
+                   formControlName="email">
+            <mat-icon matSuffix>person_outline</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Password</mat-label>
+            <input matInput 
+                   [type]="hide ? 'password' : 'text'" 
+                   placeholder="****"
+                   formControlName="password">
+            <button mat-icon-button matSuffix type="button" (click)="hide = !hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+        <button class="w-full" 
+                mat-raised-button 
+                color="primary" 
+                type="submit"
+                [disabled]="loginForm.invalid">
+            Login
+        </button>
+    </form>
+</mat-card>
