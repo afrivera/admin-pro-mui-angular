@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  base_url: 'https://management-pro.herokuapp.com/api/'
+  base_url: 'https://management-pro.herokuapp.com/api'
 };

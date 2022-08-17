@@ -11,7 +11,7 @@
             <input matInput type="email" 
                    placeholder="Juan@correo.com"
                    formControlName="email">
-            <mat-icon matSuffix>person_outline</mat-icon>
+            <mat-icon matSuffix>email</mat-icon>
         </mat-form-field>
         <mat-form-field appearance="fill" class="w-full">
             <mat-label>Password</mat-label>
@@ -31,4 +31,8 @@
             Login
         </button>
     </form>
+
+    <div class="text-center mt-2">
+        Don't have an account? <a [routerLink]="['/auth', 'register']" class="text-[blue]">Sign Up</a>
+    </div>
 </mat-card>

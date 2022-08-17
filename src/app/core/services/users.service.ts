@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment.prod';
-import { catchError, of, tap } from 'rxjs';
+import { catchError, map, of, tap } from 'rxjs';
 
 
 const { base_url } = environment;
@@ -32,5 +32,19 @@ export class UsersService {
                 }),
                 catchError( err => of( false ))
               ) 
+  }
+
+  createUser( formdata: any){
+    return this._http.post(`${base_url}/users`, formdata )
+              .pipe(
+                tap(
+                  (resp:any) => {
+                    console.log(resp)
+                    this.saveLS(resp.body.token, resp.body.menu)
+                  }
+                ),
+                map(res => true),
+                catchError(err => of( false ))
+              )
   }
 }

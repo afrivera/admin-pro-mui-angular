@@ -1,1 +1,62 @@
-<p>register works!</p>
+<mat-card class="w-full max-w-[300px]">
+    <img class="w-1/2 mx-auto mb-3" src="./assets/login/log.png" alt="photo-login">
+    <div class="flex justify-center">
+        <mat-card-title >Sign Up</mat-card-title>        
+    </div>
+    <form autocomplete="off" 
+          [formGroup]="signForm"
+          (submit)="register()">
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>UserName</mat-label>
+            <input matInput type="text" 
+                   placeholder="Juan David"
+                   formControlName="name">
+            <mat-icon matSuffix>person_outline</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" 
+                   placeholder="Juan@correo.com"
+                   formControlName="email">
+            <mat-icon matSuffix>email</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Password</mat-label>
+            <input matInput 
+                   [type]="hide ? 'password' : 'text'" 
+                   placeholder="****"
+                   formControlName="password">
+            <button mat-icon-button matSuffix type="button" (click)="hide = !hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Valid Password</mat-label>
+            <input matInput 
+                   [type]="hide2 ? 'password' : 'text'" 
+                   placeholder="****"
+                   formControlName="password2">
+            <button mat-icon-button matSuffix type="button" (click)="hide2 = !hide2">
+                <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-checkbox
+          class="mb-2"
+          color="primary"
+          formControlName="accept"
+          >
+        Accept terms
+      </mat-checkbox>
+        <button class="w-full" 
+                mat-raised-button 
+                color="primary" 
+                type="submit"
+                [disabled]="signForm.invalid">
+            Register
+        </button>
+    </form>
+
+    <div class="text-center mt-2">
+        Already have an account?<a [routerLink]="['/auth', 'login']" class="text-[blue] ml-1">Login</a>
+    </div>
+</mat-card>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UsersService } from '../../../core/services/users.service';
 
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor( 
     private fb: FormBuilder,
     private userService: UsersService,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) {
     this.loginForm = this.fb.group({
       email: ['test20@gmail.com', [Validators.required, Validators.email]],
@@ -33,9 +35,17 @@ export class LoginComponent implements OnInit {
           if(resp ){
             this.router.navigateByUrl('/dashboard');
           } else {
-            alert('there was an error')
+            this.errorSnack();
           }
         })
+  }
+
+  errorSnack(){
+    this._snackBar.open('email or password incorrect', '', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+    });
   }
 
 }
