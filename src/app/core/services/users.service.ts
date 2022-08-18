@@ -42,7 +42,9 @@ export class UsersService {
     return this._http.post(`${base_url}/auth/login`, data )
               .pipe(
                 tap( (resp: any) => {
+                  const { name, email, image, google, role, uid } = resp.body.user;
                   this.saveLS( resp.body.token, resp.body.menu);
+                  this.user = new User( name, email, '', image, google, role, uid);
                   return true
                 }),
                 catchError( err => of( false ))
