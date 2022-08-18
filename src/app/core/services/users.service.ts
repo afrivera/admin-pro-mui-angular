@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment.prod';
-import { catchError, map, of, tap } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
+
+
+import { User } from '../models/user.model';
 
 
 const { base_url } = environment;
@@ -12,7 +15,19 @@ const { base_url } = environment;
 })
 export class UsersService {
 
-  public user!: any;
+  public user!: User;
+
+  get token(){
+    return localStorage.getItem('x-token') || '';
+  }
+
+  get role(): 'ADMIN_ROLE' | 'USER_ROLE'{
+    return this.user.role!
+  }
+
+  get uid(){
+    return this.user.uid || '';
+  }
 
   constructor(
     private _http: HttpClient
@@ -46,5 +61,18 @@ export class UsersService {
                 map(res => true),
                 catchError(err => of( false ))
               )
+  }
+
+  ValidToken(): Observable<boolean>{
+    return this._http.get(`${base_url}/auth/renew`)
+      .pipe(
+        map( (resp: any) => {
+          const { name, email, image, google, role, uid } = resp.body.user;
+          this.user = new User( name, email, '', image, google, role, uid);
+          this.saveLS( resp.body.token, resp.body.menu);
+          return true;
+        }),
+        catchError( err => of( false ))
+      )
   }
 }
