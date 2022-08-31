@@ -41,7 +41,7 @@ export class UsersService {
   login( data: { email: string, password: string }){
     return this._http.post(`${base_url}/auth/login`, data )
               .pipe(
-                tap( (resp: any) => {
+                map( (resp: any) => {
                   const { name, email, image, google, role, uid } = resp.body.user;
                   this.saveLS( resp.body.token, resp.body.menu);
                   this.user = new User( name, email, '', image, google, role, uid);

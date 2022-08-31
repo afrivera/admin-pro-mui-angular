@@ -6,14 +6,15 @@ import { MenuItem } from '../interfaces/menuSidebar.interface';
 })
 export class SidebarService implements OnInit{
 
-  public menu: MenuItem[] = []
+  public menu: any[] = []
 
   constructor() { }
+
   ngOnInit(): void {
     this.loadMenu();
   }
 
   loadMenu(){
-    this.menu = JSON.parse( localStorage.getItem('menu')!);
+    this.menu = JSON.parse( localStorage.getItem('menu')!) || [];
   }
 }

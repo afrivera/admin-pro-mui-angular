@@ -12,18 +12,20 @@ import { MenuItem } from '../../../core/interfaces/menuSidebar.interface';
 export class HomeComponent implements OnInit {
 
   public user : User;
-  public menuItems: MenuItem[];
+  public menuItems!: MenuItem[];
 
   constructor(
     public sidebarService: SidebarService,
     private userService : UsersService,
   ) { 
-    this.user = userService.user;
-    this.menuItems = this.sidebarService.menu
-    console.log(this.menuItems)
+    this.menuItems = this.sidebarService.menu;
+    this.user = this.userService.user;
+    console.log(this.menuItems);
   }
-
+  
   ngOnInit(): void {
+    this.sidebarService.loadMenu();
+    this.menuItems = this.sidebarService.menu
   }
 
 }
