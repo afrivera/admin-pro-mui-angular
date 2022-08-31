@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
 
   public user : User;
   public menuItems!: MenuItem[];
+  public users: User[] = [];
 
   constructor(
     public sidebarService: SidebarService,
@@ -20,12 +21,13 @@ export class HomeComponent implements OnInit {
   ) { 
     this.menuItems = this.sidebarService.menu;
     this.user = this.userService.user;
-    console.log(this.menuItems);
   }
   
   ngOnInit(): void {
     this.sidebarService.loadMenu();
     this.menuItems = this.sidebarService.menu
   }
+
+  
 
 }

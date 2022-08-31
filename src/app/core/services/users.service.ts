@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment.prod';
-import { catchError, map, Observable, of, tap } from 'rxjs';
+import { catchError, delay, map, Observable, of, tap } from 'rxjs';
 
 
 import { User } from '../models/user.model';
@@ -63,6 +63,19 @@ export class UsersService {
                 map(res => true),
                 catchError(err => of( false ))
               )
+  }
+
+  getUsers(){
+    return this._http.get(`${base_url}/users`, {headers: {'x-token': this.token}})
+            .pipe(
+              delay(500),
+              map( (resp: any) => {
+                const users = resp.body.users.map( (user: any) => new User(user.name, user.email, '', user.image, user.google, user.role, user.uid));
+                return {
+                  users
+                }
+              })
+            )
   }
 
   ValidToken(): Observable<boolean>{

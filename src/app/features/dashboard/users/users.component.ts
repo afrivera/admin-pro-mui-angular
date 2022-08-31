@@ -2,6 +2,8 @@ import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { UsersService } from '../../../core/services/users.service';
+import { User } from '../../../core/models/user.model';
 
 export interface UserData {
   avatar: string;
@@ -54,20 +56,25 @@ const NAMES: string[] = [
 export class UsersComponent implements OnInit, AfterViewInit {
   
   displayedColumns: string[] = ['avatar', 'name', 'email', 'role', 'auth', 'actions'];
-  dataSource!: MatTableDataSource<UserData>;
+  dataSource!: MatTableDataSource<User>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor() {
+  public users :User [] = [];
+
+  constructor(
+    private userService: UsersService
+  ) {
     // Create 100 users
     const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
 
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+    this.loadUsers();
+    this.dataSource = new MatTableDataSource(this.users);
+    
   }
   ngOnInit(): void {
-    console.log('ok')
   }
 
   ngAfterViewInit() {
@@ -82,6 +89,14 @@ export class UsersComponent implements OnInit, AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  loadUsers(){
+    this.userService.getUsers()
+      .subscribe( (res: any) => {
+        this.users = res;
+        console.log(this.users)
+      })
   }
 
 }
