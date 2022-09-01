@@ -22,7 +22,7 @@
         <table mat-table [dataSource]="dataSource" matSort >
   
           <!-- ID Column -->
-          <ng-container matColumnDef="avatar" sticky="true">
+          <ng-container matColumnDef="image" sticky="true">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> AVATAR </th>
             <td mat-cell *matCellDef="let row" class="center">
               <img class="avatar mat-elevation-z8 text-center" src="/assets/andres.jpg" alt="">
@@ -48,11 +48,11 @@
           </ng-container>
   
           <!-- Auth Column -->
-          <ng-container matColumnDef="auth" sticky="true">
+          <ng-container matColumnDef="google" sticky="true">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> auth </th>
             <td mat-cell *matCellDef="let row">
-              <span color="primary" class="label label-danger">Google</span>
-              <span color="warn" class="label label-danger">Email</span>
+              <span *ngIf="row.google" color="primary" class="label label-danger">Google</span>
+              <span *ngIf="!row.google" color="warn" class="label label-danger">Email</span>
             </td>
           </ng-container>
   

@@ -71,9 +71,7 @@ export class UsersService {
               delay(500),
               map( (resp: any) => {
                 const users = resp.body.users.map( (user: any) => new User(user.name, user.email, '', user.image, user.google, user.role, user.uid));
-                return {
-                  users
-                }
+                return users;
               })
             )
   }
