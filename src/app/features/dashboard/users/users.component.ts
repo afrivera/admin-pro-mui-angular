@@ -5,48 +5,6 @@ import {MatTableDataSource} from '@angular/material/table';
 import { UsersService } from '../../../core/services/users.service';
 import { User } from '../../../core/models/user.model';
 
-export interface UserData {
-  avatar: string;
-  name: string;
-  email: string;
-  role: string;
-  auth: string;
-  actions: string;
-}
-
-/** Constants used to fill up our data base. */
-const FRUITS: string[] = [
-  'blueberry',
-  'lychee',
-  'kiwi',
-  'mango',
-  'peach',
-  'lime',
-  'pomegranate',
-  'pineapple',
-];
-const NAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
-
 
 @Component({
   selector: 'app-users',
@@ -57,6 +15,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   
   displayedColumns: string[] = ['image', 'name', 'email', 'role', 'google', 'actions'];
   dataSource!: MatTableDataSource<User>;
+  loading: boolean = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -90,30 +49,22 @@ export class UsersComponent implements OnInit, AfterViewInit {
   }
 
   loadUsers(){
+    this.loading = true
     this.userService.getUsers()
       .subscribe( (res: any) => {
         this.users = res;
         this.dataSource = new MatTableDataSource(this.users);
+        this.loading = false;
       })
+  }
+
+  editUser( user: User) {
+    console.log(user)
+  }
+
+  destroyUser( id: string){
+    console.log(id);
   }
 
 }
 
-function createNewUser(id: number): UserData {
-  const name =
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
-    ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
-    '.';
-  const email = 
-    NAMES[Math.round(Math.random() * (NAMES.length -1 ))] +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '@correo.com'
-  return {
-    avatar: '',
-    name,
-    email,
-    role :'USER_ROLE',
-    auth: 'EMAIL',
-    actions: 'EDIT',
-  };
-}
