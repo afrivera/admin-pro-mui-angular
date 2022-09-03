@@ -63,7 +63,14 @@ export class UsersComponent implements OnInit, AfterViewInit {
   }
 
   destroyUser( id: string){
-    console.log(id);
+    
+    this.userService.destroyUser( id )
+        .subscribe({
+          next: (res: any) => {
+            console.log(`${ id } eliminado`);
+            this.loadUsers();
+          },
+        })
   }
 
 }

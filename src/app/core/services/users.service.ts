@@ -76,6 +76,10 @@ export class UsersService {
             )
   }
 
+  destroyUser( id: string ){
+    return this._http.delete(`${base_url}/users/${ id }`, { headers: { 'x-token': this.token }});
+  }
+
   ValidToken(): Observable<boolean>{
     return this._http.get(`${base_url}/auth/renew`)
       .pipe(
